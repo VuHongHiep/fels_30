@@ -13,24 +13,24 @@
 
 ActiveRecord::Schema.define(version: 20150203072137) do
 
-  create_table "activities", force: true do |t|
-    t.integer  "user_id"
-    t.string   "action"
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "action",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
-  create_table "categories", force: true do |t|
-    t.string   "descript"
+  create_table "categories", force: :cascade do |t|
+    t.string   "descript",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "learneds", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "word_id"
+  create_table "learneds", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "word_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 20150203072137) do
   add_index "learneds", ["user_id"], name: "index_learneds_on_user_id", using: :btree
   add_index "learneds", ["word_id"], name: "index_learneds_on_word_id", using: :btree
 
-  create_table "lessons", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "category_id"
-    t.integer  "result"
-    t.integer  "numberOfQuestion"
+  create_table "lessons", force: :cascade do |t|
+    t.integer  "user_id",          limit: 4
+    t.integer  "category_id",      limit: 4
+    t.integer  "result",           limit: 4
+    t.integer  "numberOfQuestion", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,20 +50,20 @@ ActiveRecord::Schema.define(version: 20150203072137) do
   add_index "lessons", ["category_id"], name: "index_lessons_on_category_id", using: :btree
   add_index "lessons", ["user_id"], name: "index_lessons_on_user_id", using: :btree
 
-  create_table "questions", force: true do |t|
-    t.string   "answer"
-    t.boolean  "check"
-    t.integer  "word_id"
+  create_table "questions", force: :cascade do |t|
+    t.string   "answer",     limit: 255
+    t.boolean  "check",      limit: 1
+    t.integer  "word_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "questions", ["word_id"], name: "index_questions_on_word_id", using: :btree
 
-  create_table "quizzes", force: true do |t|
-    t.integer  "word_id"
-    t.integer  "question_id"
-    t.integer  "lesson_id"
+  create_table "quizzes", force: :cascade do |t|
+    t.integer  "word_id",     limit: 4
+    t.integer  "question_id", limit: 4
+    t.integer  "lesson_id",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,28 +72,28 @@ ActiveRecord::Schema.define(version: 20150203072137) do
   add_index "quizzes", ["question_id"], name: "index_quizzes_on_question_id", using: :btree
   add_index "quizzes", ["word_id"], name: "index_quizzes_on_word_id", using: :btree
 
-  create_table "relationships", force: true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id", limit: 4
+    t.integer  "followed_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "avatar"
-    t.boolean  "admin"
-    t.integer  "words"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
+    t.string   "password_digest", limit: 255
+    t.string   "avatar",          limit: 255
+    t.boolean  "admin",           limit: 1
+    t.integer  "words",           limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "words", force: true do |t|
-    t.string   "name"
-    t.string   "mean"
-    t.integer  "category_id"
+  create_table "words", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "mean",        limit: 255
+    t.integer  "category_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
