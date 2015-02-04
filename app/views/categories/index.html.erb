@@ -1,0 +1,16 @@
+<h1>Listing Catergories<h1>
+  
+<ol>
+  <% @categories.each do |category| %>
+    <li><%= category.descript %>
+    <% if category.words.any? %>
+        <% @words = category.words %>
+        <h4>Word (<%= category.words.count %>)</h4>
+        <ol>
+          <%= render @words %>
+        </ol>
+
+      <% end %>
+    </li>
+  <% end %>
+<ol>
