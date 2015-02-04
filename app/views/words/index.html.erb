@@ -1,0 +1,15 @@
+<h1>Listing Words</h1>
+<h3>Category</h3>
+<%= form_tag(words_path, :method => "get") do %>
+<%= select_tag(:category_id, options_for_select(@categories.map{|c| [c.descript, c.id]}.insert(0,['All','all']),
+                                                :selected => params[:category_id]),
+               {:onchange => 'this.form.submit()'})%>
+<% end %>
+<ol>
+  <% @words.each do |word| %>
+  <li>
+    <span><%= word.name %></span>
+    <span><%= word.mean %></span>
+  </li>
+  <% end %>
+</ol>
