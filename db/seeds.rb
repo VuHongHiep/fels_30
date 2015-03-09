@@ -16,6 +16,14 @@ for i in 1..5
   end
 end
 
+User.create!(name:  "hieu",
+email: "hieu@gmail.com",
+password:              "111111",
+password_confirmation: "111111",
+avatar: "avatar_default.png",
+admin: true,
+words: 10)
+
 User.create!(name:  "Example User",
 email: "example@railstutorial.org",
 password:              "foobar",
@@ -24,12 +32,20 @@ avatar: "avatar_default.png",
 admin: true,
 words: 10)
 
-User.create!(name:  "hieu",
-email: "hieu@gmail.com",
-password:              "111111",
-password_confirmation: "111111",
-avatar: "avatar_default.png",
-admin: true,
-words: 10
-)
+99.times do |n|
+  User.create!(name:  "Example User-#{n+1}",
+	email: "example-#{n+1}@railstutorial.org",
+	password:              "foobar",
+	password_confirmation: "foobar",
+	avatar: "avatar_default.png",
+	admin: false,
+	words: 10)
+end
 
+# Following relationships
+users = User.all
+user  = User.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
