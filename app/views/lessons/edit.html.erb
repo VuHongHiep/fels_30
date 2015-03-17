@@ -1,0 +1,19 @@
+<% provide(:title, @lesson.category.descript) %>
+<h1>Lesson <%= @lesson.id %></h1>
+<p><h3>Category: <i><%= @lesson.category.descript %></i></h3></p>
+<%= form_for @lesson do |f| %>
+  <div>
+    <%= f.fields_for :quizzes do |q| %>
+      <% quiz = q.object %>
+      <caption><h1><%= q.index + 1 %>. <%= quiz.word.name %></h1></caption>
+      <% quiz.word.questions.each do |question| %>
+        <span><%= q.radio_button :question_id, question.id, checked: true %></span>
+        <span><%= q.label :question_id, question.answer %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <%= label_tag "Next","Next", id:"btnNext", class:"button btn btn-primary" %>
+    <%= f.submit "Submit", id:"btnSubmit", class:"button btn btn-primary" %>
+  </div>
+<% end %>

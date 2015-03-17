@@ -1,5 +1,4 @@
 <h1>Listing Catergories<h1>
-  
 <ol>
   <% @categories.each do |category| %>
     <li><%= category.descript %>
@@ -9,7 +8,15 @@
         <ol>
           <%= render @words %>
         </ol>
-
+        <ol>
+        <h3>
+          <% @lesson = current_user.lessons.build() %>
+          <%= form_for(@lesson) do |f| %>
+            <%= hidden_field_tag :category_id, category.id %>
+            <%= f.submit "Start Lesson", class: "btn btn-primary" %>
+          <% end %>
+        </h3>
+      </ol>
       <% end %>
     </li>
   <% end %>

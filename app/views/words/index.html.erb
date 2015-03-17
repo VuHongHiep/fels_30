@@ -10,6 +10,10 @@
   <li>
     <span><%= word.name %></span>
     <span><%= word.mean %></span>
+    <% if current_user.admin? %>
+      <span><%= link_to "edit", edit_word_path(word) %></span>
+      <span><%= link_to "delete", '#' %></span>
+    <% end %>
   </li>
   <% end %>
 </ol>

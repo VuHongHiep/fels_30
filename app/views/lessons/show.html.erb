@@ -1,0 +1,10 @@
+<h1>Result of Lesson <%= @lesson.id %></h1>
+<div>
+  <% @lesson.quizzes.each_with_index do |q, index| %>
+    <div>
+      <span><%= index + 1 %>. <span>"<%= q.word.name %>"</span>
+      <span><%= q.question.answer %></span>
+      <span><%= q.question.check %></span>
+    </div>
+  <% end %>
+</div>
