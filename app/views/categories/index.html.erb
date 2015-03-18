@@ -10,6 +10,9 @@
         </ol>
         <ol>
         <h3>
+          <%= link_to "Add Words", edit_category_path(category) %>
+        </h3>
+        <h3>
           <% @lesson = current_user.lessons.build() %>
           <%= form_for(@lesson) do |f| %>
             <%= hidden_field_tag :category_id, category.id %>

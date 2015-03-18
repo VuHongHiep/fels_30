@@ -1,0 +1,11 @@
+<h1>Adding more words</h1>
+<%= @category.descript %>
+<%= form_for @category do |f| %>
+  <p>
+    <%= f.label :descript %>
+  </p>
+  <%= f.fields_for :words, @word do |builder| %>
+    <%= render 'words/word_fields', :f => builder %>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

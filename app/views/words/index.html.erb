@@ -1,10 +1,17 @@
 <h1>Listing Words</h1>
 <h3>Category</h3>
 <%= form_tag(words_path, :method => "get") do %>
-<%= select_tag(:category_id, options_for_select(@categories.map{|c| [c.descript, c.id]}.insert(0,['All','all']),
-                                                :selected => params[:category_id]),
-               {:onchange => 'this.form.submit()'})%>
+  <%= select_tag(:category_id, options_for_select(@categories, selected: params[:category_id]),
+    onchange: 'this.form.submit()')%>
+
+  <% ['learned', 'not learned', 'all'].each do |item| %>
+    <%= item %>
+    <%= radio_button_tag :learned, item, false,
+      checked: params[:learned] == item,
+      onclick: 'this.parentNode.submit()' %>
+  <% end %>
 <% end %>
+
 <ol>
   <% @words.each do |word| %>
   <li>
@@ -12,7 +19,7 @@
     <span><%= word.mean %></span>
     <% if current_user.admin? %>
       <span><%= link_to "edit", edit_word_path(word) %></span>
-      <span><%= link_to "delete", '#' %></span>
+      <span><%= link_to "delete", word, method: :delete, data: {confirm: "Are you sure?"} %></span>
     <% end %>
   </li>
   <% end %>

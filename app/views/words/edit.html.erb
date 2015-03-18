@@ -1,0 +1,16 @@
+<% provide(:title, "Edit Word") %>
+<h1>Update your word</h1>
+<%= form_for @word do |f| %>
+  <h3><%= @word.name %></h3>
+  <ul>
+    <%= f.fields_for :questions do |q| %>
+      <li>
+        <span><%= q.text_field :answer %></span>
+        <span><%= q.radio_button :check, checked: true %></span>
+      </li>
+    <% end %>
+  </ul>
+  <div>
+    <%= f.submit "Submit", id:"btnSubmit", class:"button btn btn-primary" %>
+  </div>
+<% end %>

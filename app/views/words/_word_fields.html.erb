@@ -1,0 +1,8 @@
+<p>
+  <h3>Word : </h3>
+  <%= f.text_area :name %><br />
+  <%= f.text_area :mean %>
+</p>
+<%= f.fields_for :questions do |builder| %>
+  <%= render 'words/question_fields', :f => builder %>
+<% end %>
